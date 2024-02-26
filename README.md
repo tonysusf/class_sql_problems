@@ -1,2 +1,2 @@
 # classic_sql_problems
-Class Database SQL Problems
+Classic Database SQL Problems
