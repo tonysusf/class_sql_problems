@@ -1,2 +1,2 @@
-# class_sql_problems
+# classic_sql_problems
 Class Database SQL Problems
