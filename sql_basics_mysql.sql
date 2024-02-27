@@ -2,8 +2,8 @@
 -- Date
 --------------------------
 -- date to string
-select date_format(date_col, '%Y-%m-%d') from table;
-select date_format(date_col, '%Y-%m-%d %H:%i:%s') from table;
+select date_format(current_date(), '%Y-%m-%d');
+select date_format(current_date(), '%Y-%m-%d %H:%i:%s');
 
 -- string to date
 select str_to_date('2022-01-15', '%Y-%m-%d');
@@ -13,9 +13,9 @@ select str_to_date('2022-01-15 10:00:00', '%Y-%m-%d %H:%i:%s');
 select date_format(date_col, '%Y-%m') from table;
 
 -- add N days, months or years
-select date_add(date_col, interval 7 day) from table;
-select date_add(date_col, interval 3 month) from table;
-select date_add(date_col, interval 2 year) from table;
+select date_add(current_date(), interval 7 day);
+select date_add(current_date(), interval 3 month);
+select date_add(current_date(), interval 2 year);
 
 -- datediff
 select order_id, datediff(delivery_date, order_date) as days_to_deliver from orders;
@@ -24,16 +24,16 @@ select order_id, datediff(delivery_date, order_date) as days_to_deliver from ord
 -- String
 --------------------------
 -- concat
-select concat(first_name, ' ', last_name) as full_name from employees;
+select concat(first_name, ' ', last_name) from employees;
 
--- upper case lower case
-select upper(name), lower(name) from users;
+-- group concat/join
+select group_concat(name separator ', ') from employees;
 
--- string length
+
+-- upper case lower case, length, substring
+select upper('Hell'), lower('Hello');
 select length('Hello World');
-
--- substring
-select substring(description, 11, 20) from products;
+select substring('Hello World', 1, 5);
 
 -- replace
 select replace('apple, banana, cherry', ', ', '|');
@@ -60,5 +60,14 @@ select employee_id,
         else 'Low'
     end as salary_category
 from employees;
+
+-- generate_series via common table expression (CTE)
+with recursive numbers AS (
+    select 1 as num
+    union all
+    select num + 1 from numbers WHERE n < 100
+)
+select num from numbers;
+
 
 
